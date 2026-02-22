@@ -1,0 +1,63 @@
+﻿<Window x:Class="MiniCadProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TerCAD Engine" Height="850" Width="1250" WindowStartupLocation="CenterScreen">
+    <Grid Background="#1E1E1E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Background="Transparent" ClipToBounds="True"
+                MouseWheel="OnMouseWheel" MouseDown="OnMouseDown" MouseMove="OnMouseMove">
+            <Canvas x:Name="DrawingCanvas" >
+                <Canvas.Background>
+                    <VisualBrush TileMode="Tile" Viewport="0,0,50,50" ViewportUnits="Absolute">
+                        <VisualBrush.Visual>
+                            <Grid Width="50" Height="50">
+                                <Path Data="M 50 0 L 0 0 0 50" Stroke="#222" StrokeThickness="1" />
+                            </Grid>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Canvas.Background>
+                <Canvas.RenderTransform>
+                    <MatrixTransform x:Name="MainTransform" />
+                </Canvas.RenderTransform>
+                <Rectangle x:Name="SnapMarker" Width="10" Height="10" Stroke="SpringGreen" StrokeThickness="2" Visibility="Collapsed" Panel.ZIndex="100"/>
+            </Canvas>
+        </Border>
+
+        <ListBox x:Name="CmdHistory" Grid.Row="1" Grid.Column="0" Background="#1A1A1A" Foreground="#CCC" BorderThickness="0,1,0,1" BorderBrush="#333" FontFamily="Consolas"/>
+
+        <TextBox x:Name="CmdInput" Grid.Row="2" Grid.Column="0" Background="#252526" Foreground="White" BorderThickness="0"
+                 FontFamily="Consolas" FontSize="15" VerticalContentAlignment="Center" KeyDown="CmdInput_KeyDown" Padding="10,0" CaretBrush="White"/>
+
+        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Background="#2D2D2D">
+            <TextBlock Text="NESNE ÖZELLİKLERİ" Foreground="White" FontWeight="Bold" Margin="15,15,15,5"/>
+            <Border Background="#1E1E1E" Margin="10" Padding="10" CornerRadius="5">
+                <StackPanel>
+                    <TextBlock Text="Renk:" Foreground="#888"/>
+                    <ComboBox x:Name="ColorPicker" Margin="0,5" SelectionChanged="ColorPicker_Changed">
+                        <ComboBoxItem Content="Beyaz" IsSelected="True" Tag="White"/>
+                        <ComboBoxItem Content="Kırmızı" Tag="Red"/>
+                        <ComboBoxItem Content="Mavi" Tag="Cyan"/>
+                        <ComboBoxItem Content="Sarı" Tag="Yellow"/>
+                    </ComboBox>
+                    <TextBlock Text="Kalınlık:" Foreground="#888" Margin="0,10,0,0"/>
+                    <Slider x:Name="ThickSlider" Minimum="1" Maximum="10" Value="2" ValueChanged="Slider_Changed"/>
+                </StackPanel>
+            </Border>
+            <TextBlock x:Name="CoordTxt" Foreground="Cyan" Text="X: 0, Y: 0" Margin="15,5" FontFamily="Consolas"/>
+            <TextBlock x:Name="StatusTxt" Foreground="Orange" Text="ORTHO: KAPALI (F8)" Margin="15,0"/>
+            <Separator Margin="10,20" Background="#444"/>
+            <TextBlock Text="KISA YOLLAR" Foreground="White" FontWeight="Bold" Margin="15,5"/>
+            <TextBlock Text="L: Çizgi&#x0a;REC: Dikdörtgen&#x0a;C: Daire&#x0a;POL: Çokgen&#x0a;U: Geri Al&#x0a;EXP: Export" 
+                       Foreground="#666" FontSize="11" Margin="15,5" LineHeight="18"/>
+        </StackPanel>
+    </Grid>
+</Window>

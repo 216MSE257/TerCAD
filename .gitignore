@@ -1,0 +1,35 @@
+## --- Visual Studio & .NET Build Output ---
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esults/
+
+## --- VS Code Specific ---
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+## --- User-specific files ---
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+## --- Output Files (Bizim CAD çıktılarımız) ---
+*.dxf
+Export.dxf
+Cizim.dxf
+
+## --- Build & Publish ---
+publish/
+*.exe
+*.dll
+*.pdb
+*.msi
+*.nupkg
+
+## --- System Files ---
+.DS_Store
+Thumbs.db
